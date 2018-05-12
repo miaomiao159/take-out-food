@@ -1,12 +1,25 @@
-// 请把与index.html页面相关的javascript代码写在这里
-// 同时删除该注释
-
 function calculatePrice() {
-  // 想办法调用`bestCharge`并且把返回的字符串
-  // 显示在html页面的`message`中
+  var mitems = document.getElementById('items');
+  var mli = mitems.getElementsByTagName('li');
+  let inputs = [];
+  for (let i = 0; i < mli.length; i++) {
+    var minput = mli[i].getElementsByTagName('input');
+    if (parseInt(minput[0].value) == 0) {
+      continue;
+    }
+    else {
+      var mspan = mli[i].getElementsByTagName('span');
+      var temp = mspan[0].innerText + "x" + parseInt(minput[0].value);
+      inputs.push(temp);
+    }
+  }
+  document.getElementById('message').innerHTML = bestCharge(inputs);
 }
 
-function clear() {
-  // 清除用户的选择，以及页面显示的信息
-  // 清除之后，用户可以继续正常使用各项功能
+function clear1() {
+  var input = document.getElementsByTagName('input');
+  document.getElementById('message').innerHTML = '';
+  for (let i = 0; i < input.length; i++) {
+    input[i].value = '0';
+  }
 }

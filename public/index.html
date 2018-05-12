@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Take Out Food</title>
 
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./index.css"/>
 
     <script type="text/javascript" src="../src/items.js"></script>
     <script type="text/javascript" src="../src/promotions.js"></script>
@@ -13,22 +13,73 @@
 </head>
 <body>
 
-    <h1>“好多肉”在线点餐系统</h1>
+<h1>“好多肉”在线点餐系统</h1>
 
-    <div id="items">
-        把`loadAllItems()`中的菜品信息以动态加载的方式显示在这里，并且能够让用户输入数量
-    </div>
+<div id="items">
+    把`loadAllItems()`中的菜品信息以动态加载的方式显示在这里，并且能够让用户输入数量
+    <script>
+        var mdiv = document.getElementById('items');
+        var menuul = document.createElement('ul');
+        mdiv.appendChild(menuul);
+        var data = loadAllItems();
+        for (let i = 0; i < data.length; i++) {
+            var menuli = document.createElement('li');
+            menuul.appendChild(menuli);
+            var mid = document.createElement('span');
+            mid.innerText = data[i].id;
+            var mname = document.createElement('span');
+            mname.innerText = data[i].name;
+            var price = document.createElement('span');
+            price.innerText = data[i].price.toString();
 
-    <div id="promotions">
-        把`loadPromotions()`中的优惠信息以动态加载的方式显示在这里，让用户看到即可
-    </div>
+            menuli.appendChild(mid);
+            menuli.appendChild(mname);
+            menuli.appendChild(price);
 
-    <div>
-        <button onclick="calculatePrice()">结算</button>
-        <button onclick="clear()">清除</button>
-    </div>
+            var minput = document.createElement('input');
+            minput.type = 'number';
+            minput.min = '0';
+            minput.value = '0';
+            menuli.appendChild(minput);
+        }
+    </script>
+</div>
 
-    <pre id="message">
+<div id="promotions">
+    把`loadPromotions()`中的优惠信息以动态加载的方式显示在这里，让用户看到即可
+    <script>
+        var fdiv = document.getElementById('promotions');
+        var favorableul = document.createElement('ul');
+        fdiv.appendChild(favorableul);
+        var data1 = loadPromotions();
+        for (let i = 0; i < data1.length; i++) {
+            if (typeof(data1[i].items) == 'undefined') {
+                var favorableli = document.createElement('li');
+                favorableul.appendChild(favorableli);
+                var mtype = document.createElement('span');
+                mtype.innerText = data1[i].type;
+                favorableli.appendChild(mtype);
+            }
+            else {
+                var favorableli = document.createElement('li');
+                favorableul.appendChild(favorableli);
+                var mtype = document.createElement('span');
+                mtype.innerText = data1[i].type;
+                var mitems = document.createElement('span');
+                mitems.innerText = data1[i].items.toString();
+                favorableli.appendChild(mtype);
+                favorableli.appendChild(mitems);
+            }
+        }
+    </script>
+</div>
+
+<div>
+    <button onclick="calculatePrice()">结算</button>
+    <button onclick="clear1()">清除</button>
+</div>
+
+<pre id="message">
         /* 请将结算后产生的汇总字符串显示在这里 */
     </pre>
 

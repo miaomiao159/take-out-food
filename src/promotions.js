@@ -1,3 +1,4 @@
+'use strict';
 function loadPromotions() {
   return [{
     type: '满30减6元'
@@ -6,3 +7,4 @@ function loadPromotions() {
     items: ['ITEM0001', 'ITEM0022']
   }];
 }
+module.exports = loadPromotions;
